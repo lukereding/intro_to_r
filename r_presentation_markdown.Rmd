@@ -1,0 +1,202 @@
+---
+title: "Introduction to R"
+output: html_notebook
+---
+
+# goals
+
+- Learn what R is and what it's used for
+- Import data into R
+- Learn basic data manipulation
+- Run some basic statistical tests:
+  - correlation test
+  - t test
+  
+
+# what is R?
+
+R is a statistical programming langauge. You can use R to do basic programming tasks but the real strength of R is in formulating statistical models, running statistical tests, and creating visualizations.
+
+Examples of things you might do with R:
+- run statistical tests
+- calculate the average of a set of numbers
+- produce a bar plot
+
+Like nearly all successful programming languages, R allows users to contribute code that extends the basic functionally of R. Whenever you can, use these 'packages': it will save you time and often others are better coders than you are.
+
+# some basics
+
+Everything that `looks like this` is code that is meant to be entered at the command prompt or console.
+
+To try to understand what a function does, type a `?` before the function name. One of R's most elementary functionas, `c`, is used to concatetate things together. Type `?c` to see the help file and examples for how to use this function.
+
+# import data into R
+
+We'll learn some basics of R by doing some simpkle analyses of a previous published dataset. The paper can by found here: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0156589#sec014. The paper tests whether male and female guppies have similar affinities for a novel object.
+
+You tell R to do things by typing things at what's called the command line. At it's most fundamental, there is no point-and-click interface in R.
+
+We'll start by loading a package. A package is a collection of functions that someone else wrote. Packages extend the functionality of R and allow you to do a lot more than you could do by yourself.
+
+You can install packages with the `install.packages` function. For example, typing `install.packages("tidyverse")` will install the tidyverse package.
+
+You can load packages with the `library` function. Functions run some code. Most of the time we'll use functions that other people wrote, but you can also write custom functions yourself. Functions have one or more arguments. Let's see this in action with the `library` function:
+
+```{r}
+
+library(tidyverse)
+
+```
+
+In the command above, `library` is the function name and `tidyverse` is the argument. This command tells R to make all the functions in the `tidyverse` package accessible to me.
+
+Now let's try to important the data.
+
+## read_csv
+
+There are lots of functions we can use to import data into R. Usually we import some kind of spreadsheet into R, usually from a program like Excel. It is usually easiest to save Excel files are _comma separated_ or `csv` files rather than the normal Excel format. 
+
+We can use the `read_csv` function to read in csv files. The main argument is the path to the csv file--the location of the csv file on your hard drive.
+
+Finally, we use the `<-` operator to assign the output of the function to an object. We can name the object anything we want. I'm going to assign the output of the `read_csv` function to an object called `df`:
+
+
+```{r}
+
+df <- read_csv("/Users/lukereding/Documents/r_presentation/data/for_presentation.csv")
+
+```
+
+Note that nothing happened when we ran that. R will give you an error or warning message if something went wrong, otherwise, it will simply do what you tell it. In this case, we only told R to assign the output of the `read_csv` function to the `df` object. To see what the `df` object is, we can just type `df` and press Enter:
+
+```{r}
+df 
+```
+
+
+`df` is a _dataframe_. This is a column data structure in R and the main type of structure you'll work with. A dataframe is just like an Excel spreadsheet: there are rows and columns. Unlike an Excel spreadsheet, everything has to be tidy and neat in an R dataframe. A dataframe is just entries in the rows and columns: there are no other cells, no plots, no summary statistics associated with the dataframe like there might be in an Excel spreadsheet.
+
+The rows are different variables and the columns are observations. For this dataset, each row is a fish and each column is some information about that fish. The output tells us that there are 31 rows and we see there are six columns. 
+
+## data types in R
+
+Each variable in the dataframe has a _data type_ associated with it. _Types_ are how you tell R what sort of data each variable is. Here are some popular data types:      
+- __numeric__: numbers. Numbers can be integers (1, 2, 3, ...) or doubles (floating point decimals like 0.654334 or 1/3). examples: 2, 7.521, 1e-7, 0.2     
+- __factors__: groups or categories. examples: treatment and control. low-dose, high-dose, control.
+- __logical__: yes/no or true/false.
+- __characters__: words. examples: "banana", "a", "Luke", "resting"
+
+When you type in `df`, R tells you what type each variable is under the name of the column. For example, under `fish` is `(chr)`. `chr` stands for _character_. Same thing for `sex`.
+
+The problem is that sex is a factor: sex represents two groups or categories of fish. Below I convert the `sex` column from a character to a factor:
+
+```{r}
+df$sex <- factor(df$sex)
+```
+
+We use the `$` to specify a column of a dataframe. So typing `df$sex` just gives us the `sex` column of `df`.
+
+I use the `factor` function to tell R that the `sex` column is a factor. Now type in `df`. Under `sex` R reports `(fctr)`, letting us know thatthe `sex` column is now a factor.
+
+# questions
+
+For our purposes today, let's ask two questions of this dataset:
+
+(1) Do the sexes differ in their preference for a novel object?
+(2) Is there a relationship between the preference for a novel object and the time the fish spends in the central corridor?
+
+Any good data analysis has at least two parts: 
+
+(1) visualizing the data
+(2) performing some statistical test
+
+We'll go through these steps for both these questions.
+
+# Do the sexes differ in their preference for a novel object?
+
+## visualizing
+
+We want to visualize the relationship between a categorcial variable--sex--and a continuous, numeric variable--preference for the novel object. One common way of representing the relationship between a continuous and categorical variable is with a boxplot.
+
+We'll use a package called `ggplot2` to make our boxplot. We already loaded `ggplot2` when we loaded `tidyverse`.
+
+`ggplot` takes a bit of getting used to but it's very powerful and the main way of plotting things in R. 
+
+To create a plot using `ggplot` requires first using the `ggplot` function. The first argument is the dataframe with the data we want to plot. The second argument is actually another function! A little mind-bending, but stick with it. In this function, called `aes`, we place all the things we want to plot. Here, we just want to plot the relationship between `sex` and `preference_for_novel_object`, so that's what we enter into the `aes` function. 
+
+The `ggplot` function is followed by additional functions that add things layer-by-layer to the plot. Just running the `ggplot` function alone doesn't do much:
+
+```{r}
+ggplot(df, aes(sex, preference_for_novel_object))
+```
+
+The variables are on the right axes, but there's nothing there! We have to tell ggplot exactly what we want. `ggplot` comes with several _geoms_ or geometries that you can add to the plot. Example _geoms_ include bars (for bar plots), boxes (for boxplots), points (for scatterplots), and lines.
+
+So now I re-do the ggplot adding a `+` sign followed by the geom I want to use:
+
+
+```{r}
+ggplot(df, aes(sex, preference_for_novel_object)) +
+  geom_boxplot()
+```
+Now we have the boxplot we wanted.
+
+The nice thing about ggplot is that the plot is built in layers, so it's easy to add, for example, the data points that make up each box by adding the geom for points:
+
+```{r}
+ggplot(df, aes(sex, preference_for_novel_object)) +
+  geom_boxplot() +
+  geom_point()
+```
+
+From the plot, we see a couple things:
+
+(1) The median preference for the novel object is similar in males and females.
+(2) The preferences of the male guppies are more variable.
+
+## stats
+
+We can eyeball the boxplot above and see that there likely isn't a relationship between `sex` and `preference` since the boxplot medians are at similar heights. This really isn't good enough though. __We can use a statistical test to tell us the probability of getting these results if there are no differences between male and female guppies.__
+
+To test whether the averages of two groups are the same, we can use a t-test. It's beyond the scope of this lecture, but there are some assumptions that a t-test makes; you should pay attention to these assumptions whenever you run a t-test in your own work.
+
+R's `t.test` function can be used to perform a t.test.
+
+The function's argument is a little tricky. It takes the form of `y ~ x`. The `~` can be read as _as a function of_. So `y ~ x` just means _y as a function of x_. Swap out the y and x with the names of your variables. Finally, tell R what dataframe you're using with the `data = ` argument:
+
+
+```{r}
+
+t.test(preference_for_novel_object ~ sex, data = df)
+
+```
+
+
+
+
+
+
+
+# exercises
+
+(1) Change the variable `interval` to a factor.
+(2) Plot the relationship between `interval` and preference for a novel object.
+(3) Run the appropriate statistical test to see whether there is a statistically significant relationship between interval and preference.
+
+
+
+```{r}
+df %>% 
+  split(.$block_of_minutes) %>% 
+  map(~ lm(preference_for_novel_object ~ time_in_central_corridor, data = .)) %>% 
+  map(summary)
+
+```
+
+
+
+
+
+
+
+
