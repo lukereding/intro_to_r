@@ -27,8 +27,9 @@ Examples of things you might do with R:
 - run statistical tests     
 - calculate the average of a set of numbers        
 - produce a bar plot       
+- parse data from Twitter     
  
-Like nearly all successful programming languages, R allows users to contribute code that extends the basic functionally of R. Whenever you can, use these 'packages': it will save you time and often others are better coders than you are.
+Like  all successful programming languages, R allows users to contribute code that extends the basic functionally of R. Whenever you can, use these 'packages': it will save you time and be more robust than if you were to code everything yourself.
 
 # some basics
 
@@ -42,29 +43,29 @@ We'll learn some basics of R by doing some simple analyses of part of a previous
 
 You tell R to do things by typing things at what's called the command line. At it's most fundamental, there is no point-and-click interface in R.
 
-We'll start by loading a package. A package is a collection of functions that someone else wrote. Packages extend the functionality of R and allow you to do a lot more than you could do by yourself.
+We'll start by loading a **package**. A package is a collection of functions that someone else wrote. _Functions_ execute some series of commands in R. Packages extend the functionality of R and allow you to do a lot more than you could do by yourself.
 
-You can install packages with the `install.packages` function. For example, typing `install.packages("tidyverse")` will install the tidyverse package.
+You can install packages with the `install.packages` function. For example, typing `install.packages("tidyverse")` will install the _tidyverse_ package (the quotations around _tidyverse_ are important!). Packages have to be installed first before they can be loaded for use. 
 
-You can load packages with the `library` function. _Functions_ execute some series of commands in R. Most of the time we'll use functions that other people wrote, but you can also write custom functions yourself. Functions have one or more _arguments_, also called _parameters_. Let's see this in action with the `library` function:
+You can load packages with the `library` function. Functions like `library` usually have one or more _arguments_, also called _parameters_. Let's see this in action with the `library` function:
 
 ```{r}
 
-library(tidyverse)
+library("tidyverse")
 
 ```
 
-In the command above, `library` is the function name and `tidyverse` is the argument. This command tells R to make all the functions in the `tidyverse` package accessible to me.
+In the command above, `library` is the function name and _"tidyverse"_ is the argument. This command tells R to make all the functions in the `tidyverse` package accessible to me.
 
-Now let's try to important the data.
+Now let's try to import the data.
 
 ## read_csv
 
-There are lots of functions we can use to import data into R. Usually we import some kind of spreadsheet into R, usually from a program like Excel. It is usually easiest to save Excel files are _comma separated_ or `csv` files rather than the normal Excel format. 
+There are lots of functions we can use to import data into R. Usually we import some kind of spreadsheet into R, usually from a program like Excel. It is usually easiest to save Excel files that are _comma separated_ or `csv` files rather than the normal Excel format. In Excel, when you click File -> Save As..., there is an option to save your file as .csv files instead of the normal excel file. csv files are play nice with R because they are just text.
 
-We can use the `read_csv` function to read in csv files. The main argument is the path to the csv file--the location of the csv file on your hard drive.
+We can use the `read_csv` function to read in csv files. The main argument is the path to the csv file--the location or address of the csv file on your hard drive.
 
-Finally, we use the `<-` operator to assign the output of the function to an _object_. An object is just the name for something. That something could be a number or a dataframe or a column of a datafrmame. 
+Finally, we use the `<-` operator to assign the output of the function to an _object_. An object is just the name for something. That something could be a number or a dataframe or a column of a datafrmame.
 
 We can name the object anything we want. I'm going to assign the output of the `read_csv` function to an object called `df`. If you don't know where this file is located on your computer, run `df <- read_csv(file.choose())` instead to look for it yourself.
 
@@ -86,9 +87,9 @@ df
 
 
 
-`df` is a _dataframe_. This is a column data structure in R and the main type of structure you'll work with. A dataframe is just like an Excel spreadsheet: there are rows and columns. Unlike an Excel spreadsheet, everything has to be tidy and neat in an R dataframe. A dataframe is just entries in the rows and columns: there are no other cells, no plots, no summary statistics associated with the dataframe like there might be in an Excel spreadsheet.
+`df` is a _dataframe_. This is a columnal data structure in R and the main type of structure you'll work with. A dataframe is just like an Excel spreadsheet: there are rows and columns. Unlike an Excel spreadsheet, everything has to be tidy and neat in an R dataframe. A dataframe is just entries in the rows and columns: there are no other cells, no plots, no summary statistics associated with the dataframe like there might be in an Excel spreadsheet.
 
-The rows are different variables and the columns are observations. For this dataset, each row is a fish and each column is some information about that fish. The output tells us that there are 31 rows and we see there are six columns. 
+The rows are  variables and the columns are observations. For this dataset, each row is a fish and each column is some information about that fish. The output tells us that there are 31 rows and we see there are six columns. 
 
 ## data types in R
 
@@ -110,11 +111,15 @@ df$sex <- factor(df$sex)
 ```
 
 
-We use the `$` to specify a column of a dataframe. So typing `df$sex` just gives us the `sex` column of `df`.
+We use the `$` to specify a column of a dataframe. So typing `df$sex` just gives us the `sex` column of `df`. You can try typing `df$sex` in the Console to see the output. So this line of code tells R, 'Make the sex column of the `df` dataframe a factor. Replace the old sex column with the new, factored, sex column.'
 
-I use the `factor` function to tell R that the `sex` column is a factor. Now type in `df`. Under `sex` R reports `(fctr)`, letting us know that the `sex` column is now a factor.
+I used the `factor` function to tell R that the `sex` column is a factor. Now type in `df`. Under `sex` R reports `(fctr)`, letting us know that the `sex` column is now a factor.
 
 Note that nothing happened when we ran that. R will give you an error or warning message if something went wrong, otherwise, it will simply do what you tell it. In this case, we only told R to assign the column `sex` in the dataframe `df` as a factor.
+
+
+
+
 
 # questions
 
@@ -122,6 +127,7 @@ For our purposes today, let's ask two questions of this dataset:
 
 (1) Do the sexes differ in their preference for a novel object?
 (2) Is there a relationship between the preference for a novel object and the time the fish spends in the central corridor?
+
 
 Any good data analysis has at least two parts: 
 
@@ -146,7 +152,7 @@ The `ggplot` function is followed by additional functions that add things layer-
 
 ```{r}
 
-ggplot(data = df, mapping = aes(sex, preference_for_novel_object))
+ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) # set up the ggplot
 
 
 ```
@@ -160,19 +166,19 @@ So now I re-do the ggplot adding a `+` sign followed by the geom I want to use:
 
 ```{r}
 
-ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) +
-  geom_boxplot()
+ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) + # set up the ggplot
+  geom_boxplot() 
 
 ```
 
 Now we have the boxplot we wanted.
 
-The nice thing about ggplot is that the plot is built in layers, so it's easy to add, for example, the data points that make up each box by adding the geom for points:
+The nice thing about `ggplot` is that the plot is built in layers, so it's easy to add, for example, the data points that make up each box by adding the geom for points:
 
 ```{r}
-ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) +
-  geom_boxplot() +
-  geom_point()
+ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) + # set up the ggplot
+  geom_boxplot() + # add the boxplots
+  geom_point() # add the points
 ```
 
 From the plot, we see a couple things:
@@ -182,13 +188,13 @@ From the plot, we see a couple things:
 
 ## stats
 
-We can eyeball the boxplot above and see that there likely isn't a relationship between `sex` and `preference` since the boxplot medians are at similar heights. This really isn't good enough though. __We can use a statistical test to tell us the probability of getting these results if there are no differences between male and female guppies.__
+We can eyeball the boxplot above and see that there likely isn't a relationship between `sex` and `preference` since the boxplot medians are at similar heights. This really isn't good enough though. __We can use a statistical test to tell us the probability of getting these results if there is no difference in the average preference between male and female guppies.__
 
-To test whether the averages of two groups are the same, we can use a t-test. It's beyond the scope of this lecture, but there are some assumptions that a t-test makes; you should pay attention to these assumptions whenever you run a t-test in your own work.
+To test whether the averages of two groups are the same, we can use a **t-test**. It's beyond the scope of this lecture, but there are some assumptions that a t-test makes; you should pay attention to these assumptions whenever you use a t-test in your own work.
 
 R's `t.test` function can be used to perform a t.test.
 
-The function's argument is a little tricky. It takes the form of `y ~ x`. The `~` can be read as _as a function of_. So `y ~ x` just means _y as a function of x_. Swap out the y and x with the names of your variables. Finally, tell R what dataframe you're using with the `data = ` argument (remember that if you every get an error when attempting to use a function, like `t.test`, to see the help file with `?t.test`):
+The function's argument is a little tricky. It takes the form of `y ~ x`. The `~` can be read as _as a function of_. So `y ~ x` just means _y as a function of x_. Swap out the y and x with the names of your variables. The variable on the x-axis in the plot above is sex and the variable on the y-axis is preference. Finally, tell R what dataframe you're using with the `data = ` argument (remember that if you every get an error when attempting to use a function, like `t.test`, to see the help file with `?t.test`):
 
 
 ```{r}
@@ -196,6 +202,13 @@ The function's argument is a little tricky. It takes the form of `y ~ x`. The `~
 t.test(preference_for_novel_object ~ sex, data = df)
 
 ```
+
+There's a lot of information in the output of the test. For out purposes, the main thing to look for the is **p value**: this is the probability of getting the results we got or more extreme results if there is no difference in the average preference for a novel object between males and females. A p-value is a probability, so it ranges between 0 and 1. A low p-value (usually < 0.05) means that the result is very improbable if there are no differences between groups. A higher p-value, like the one we got above (0.62), suggests that are data are not unlikely if there is no relationship between sex and preference.
+
+
+
+
+
 
 # Is there a relationship between the preference for a novel object and the time the fish spends in the central corridor?
 
@@ -206,8 +219,8 @@ Before, we were interested in visualizing the relationship between a _continuous
 We can plot this relationship using the same approach we used above in `ggplot`. Since boxplots don't make sense to use to show the relationship between two categorical variables, we can just plot the data points instead. The geom for this, which we encountered above, is `geom_point`. Finally, we have to modify the code above to tell ggplot we want to plot the relationship between `time_in_central_corridor` and `preference_for_novel_object`:
 
 ```{r}
-ggplot(data = df, mapping = aes(time_in_central_corridor, preference_for_novel_object)) +
-  geom_point()
+ggplot(data = df, mapping = aes(time_in_central_corridor, preference_for_novel_object)) + # set up the ggplot
+  geom_point() # add points
 ```
 
 It's often helpful when plotting a scatterplot to add a trend line. This line provides an easy way for someone to see how preference for the novel object changes as time in the central corridor increases.
@@ -216,11 +229,13 @@ We can use a new ggplot geom--`geom_smooth`--to add this trend line to the plot:
 
 ```{r}
 
-ggplot(data = df, mapping = aes(time_in_central_corridor, preference_for_novel_object)) +
-  geom_point() +
-  geom_smooth(se = FALSE, method = "lm")
+ggplot(data = df, mapping = aes(time_in_central_corridor, preference_for_novel_object)) + # set up the ggplot
+  geom_point() + # add points
+  geom_smooth(se = FALSE, method = "lm") # add line
 
 ```
+
+(Note that the `geom_smooth` function has some additional arguments. That's just to make the output a little simpler; if you'd like to understand what the arguments mean, check the help file but typing `?geom_smooth` into the Console.)
 
 Now it's easy to see that, in general, as time spent in the corridor increases, preference for the novel object declines. But how likely is this trend to exist by chance alone?
 
@@ -238,15 +253,28 @@ cor.test(df$time_in_central_corridor, df$preference_for_novel_object)
 
 ```
 
-The p-value here is less than 0.05, a traditional cutoff. Thus we conclude that it is unlikely we would see a correlation this strong if there was no relationship between time spent in the central corridot and preference.
+The p-value here is less than 0.05, the traditional cutoff. Thus we conclude that it is unlikely we would see a correlation this strong if there was no relationship between time spent in the central corridor and preference.
+
+
+
+
+
 
 # exercises
 
 ## basic
 
-(1) Change the variable `interval` to a factor.
-(2) Plot the relationship between `interval` and preference for a novel object.
-(3) Run the appropriate statistical test to see whether there is a statistically significant relationship between interval and preference.
+(1) Find the help file for the `geom_boxplot` function. What does the notch argument do? Try adding notches to the boxplot we created above.
+(2) For each variable, state its _data type_. If numeric, is it a double or integer?      
+- Temperature   
+- Make of a car      
+- letter grade in a class       
+- Height (cm)    
+(3) For a project in a different class you measure how long each of five squirrels outside the SAC spends looking for food over the course of 10 minutes. You also record the color of the squirrel (light brown, dark brown, black, albino) and how many times it ran up a tree. When you enter this data into a spreadsheet, what columns should you use? What do the rows represent? State the _data type_ for each column. 
+(4) What command would you use to print only the `time_in_central_corridor` column of `df`?
+(5) Change the variable `interval` to a factor.
+(6) Plot the relationship between `interval` and preference for a novel object.
+(7) Run the appropriate statistical test to see whether there is a statistically significant relationship between interval and preference.
 
 ## next level
 
@@ -291,6 +319,10 @@ spread(data = bad, variable, value)
 ```
 
 This function has taken the entries in the `variable` column of the `bad` dataframe and made them each its own column.
+
+
+
+
 
 # appendix: making fancier plots
 
@@ -340,14 +372,9 @@ ggplot(data = df, mapping = aes(time_in_central_corridor, preference_for_novel_o
 This plots highlights the benefits of this approach: we can now more clearly see that the negative relationship between the two variables is steeper in males than it is in females.
 
 
-```{r}
+## additional resources
 
-df %>% 
-  split(.$block_of_minutes) %>% 
-  map(~ lm(preference_for_novel_object ~ time_in_central_corridor, data = .)) %>% 
-  map(summary)
-
-```
+[This site](http://tryr.codeschool.com/) provides an easy way to learn the basics of R. [This book](http://r4ds.had.co.nz/) is extremely useful for learning how to best and most efficiently work with data in R. [These](https://www.rstudio.com/resources/cheatsheets/) cheatsheets from RStudio are also super useful.
 
 
 
