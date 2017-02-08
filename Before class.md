@@ -1,6 +1,6 @@
 # Before class
 
-### install R and RSudio
+### install R and RStudio
 
 Everyone should download both R and R studio. 
 
