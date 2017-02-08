@@ -2,7 +2,7 @@
 
 ### install R and RStudio
 
-Everyone should download both R and R studio. 
+Everyone should download both R and RStudio. 
 
 To download R, go [here](http://cran.mtu.edu/) and click on the appropriate link for your operating system. An installer should take you through a series of steps and install R onto your computer.
 
