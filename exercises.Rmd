@@ -1,0 +1,100 @@
+---
+title: "exercises"
+author: "luke reding"
+date: "2/8/2017"
+output: html_document
+---
+
+### Question 1
+
+Load the `tidyverse` package.
+
+```{r}
+
+
+
+```
+
+
+### Question 2
+
+Use the `read_csv` function to read in the common garden video spreadsheet. Save it to an object called `common_garden`. Check to to make sure all the data types are correct.
+
+_Hint:_ If you don't know where the spreadsheet is, use `file.choose()` to find it.
+
+```{r}
+
+
+
+```
+
+
+
+### Question 3
+
+Do a web search for how to find (a) the number of rows and (b) the number of columns in your `common_garden` dataframe. Enter in the R code that returns the number of rows and columns below.
+
+
+```{r}
+
+
+
+```
+
+
+### Question 4
+
+Use `ggplot` to plot the tank condition on the x-axis and the total number of male-male chases on the y axis.
+
+_Hint_: Remember the basics of using ggplot: To set up a ggplot, you need a `data` argument and a `mapping` argument. The `mapping` argument always looks like `mapping = aes(x = some_column_name, y = some_other_column_name)`. Then type `+` followed by whatever `geoms` you want to use, for example, `geom_point()`. 
+
+Follow the code from the lecture if you get confused, substituting the arguments.
+
+```{r}
+
+
+
+```
+
+
+
+### Question 5
+
+Plot the relationship between male-male chases (x-axis) and total male courting (y-axis) as a scatterplot.
+
+Again, follow the example scatterplot from the lecture if you're confused.
+
+```{r}
+
+
+
+```
+
+
+### Question 6
+
+Perform a correlation test to test whether there is statistically significant relationship between total male-male chases and total male courtships.
+
+```{r}
+
+
+```
+
+
+### Question 7
+
+boxplot of foraging in males vs females
+
+
+
+
+female-female chases by treatment
+
+
+
+
+
+
+
+
+

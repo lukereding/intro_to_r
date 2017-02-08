@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R"
+title: "Introduction to R aka Stats comes alive!"
 output: 
   html_notebook: 
     highlight: tango
@@ -8,6 +8,7 @@ output:
     toc: yes
     toc_depth: 2
 ---
+
 
 # goals
 
@@ -43,7 +44,7 @@ We'll learn some basics of R by doing some simple analyses of part of a previous
 
 You tell R to do things by typing things at what's called the command line. At it's most fundamental, there is no point-and-click interface in R.
 
-We'll start by loading a **package**. A package is a collection of functions that someone else wrote. _Functions_ execute some series of commands in R. Packages extend the functionality of R and allow you to do a lot more than you could do by yourself.
+We'll start by loading a **package**. A package is a collection of functions that someone else wrote. _Functions_ execute some series of commands in R. Packages extend the functionality of R and allow you to do a lot more than you could do by yourself. You know something is a function because there will always by parentheses around the function, like `c()`.
 
 You can install packages with the `install.packages` function. For example, typing `install.packages("tidyverse")` will install the _tidyverse_ package (the quotations around _tidyverse_ are important!). Packages have to be installed first before they can be loaded for use. 
 
@@ -152,7 +153,7 @@ The `ggplot` function is followed by additional functions that add things layer-
 
 ```{r}
 
-ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) # set up the ggplot
+ggplot(data = df, mapping = aes(x = sex, y = preference_for_novel_object)) # set up the ggplot
 
 
 ```
@@ -166,7 +167,7 @@ So now I re-do the ggplot adding a `+` sign followed by the geom I want to use:
 
 ```{r}
 
-ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) + # set up the ggplot
+ggplot(data = df, mapping = aes(x = sex, y = preference_for_novel_object)) + # set up the ggplot
   geom_boxplot() 
 
 ```
@@ -219,7 +220,7 @@ Before, we were interested in visualizing the relationship between a _continuous
 We can plot this relationship using the same approach we used above in `ggplot`. Since boxplots don't make sense to use to show the relationship between two categorical variables, we can just plot the data points instead. The geom for this, which we encountered above, is `geom_point`. Finally, we have to modify the code above to tell ggplot we want to plot the relationship between `time_in_central_corridor` and `preference_for_novel_object`:
 
 ```{r}
-ggplot(data = df, mapping = aes(time_in_central_corridor, preference_for_novel_object)) + # set up the ggplot
+ggplot(data = df, mapping = aes(x = time_in_central_corridor, y = preference_for_novel_object)) + # set up the ggplot
   geom_point() # add points
 ```
 
@@ -245,7 +246,7 @@ We can use statistics to tell us whether is likely to get a negative trend like 
 
 We can use a _correlation test_ to determine whether it's unlikely to see a negative trend this strong by chance. The `cor.test` function in R implements this test.
 
-Unlike a lot of the functions above, `cor.test` doesn't accept a `data = ` argument. Instead, we have to give it the columns individually from the dataframe usingthe `$` notation we learned about above:
+Unlike a lot of the functions above, `cor.test` doesn't accept a `data = ` argument. Instead, we have to give it the columns individually from the dataframe using the `$` notation we learned about above:
 
 ```{r}
 
@@ -260,7 +261,7 @@ The p-value here is less than 0.05, the traditional cutoff. Thus we conclude tha
 
 
 
-# exercises
+# exercises (for fun!)
 
 ## basic
 
@@ -280,6 +281,10 @@ The p-value here is less than 0.05, the traditional cutoff. Thus we conclude tha
 
 (1) Find the mean preference of the fish.
 (2) Make the boxes of the boxplot above two different colors.
+
+
+
+***************
 
 
 # appendix: reading data into R: common issues
