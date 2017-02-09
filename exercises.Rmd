@@ -83,15 +83,37 @@ Perform a correlation test to test whether there is statistically significant re
 
 ### Question 7
 
-boxplot of foraging in males vs females
+Create a boxplot of foraging in males compared with females.
 
 
+### Question 8
+
+Is there a statistically significant difference in foraging between males and females?
+
+```{r}
 
 
-female-female chases by treatment
+```
 
 
+### Question 9
 
+Plot female-female chases by treatment.
+
+```{r}
+
+
+```
+
+
+### Question 10
+
+Be creative! Plot any relationship between two variables that you haven't yet explored.
+
+```{r}
+
+
+```
 
 
 
