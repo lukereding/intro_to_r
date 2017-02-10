@@ -1,7 +1,10 @@
 ---
 title: "Introduction to R aka Stats comes alive!"
-output: 
-  html_notebook: 
+output:
+  html_document:
+    toc: yes
+    toc_depth: '2'
+  html_notebook:
     highlight: tango
     number_sections: yes
     theme: flatly
@@ -150,6 +153,8 @@ We'll use a package called `ggplot2` to make our boxplot. We already loaded `ggp
 To create a plot using `ggplot` requires first using the `ggplot` function. The first argument is the dataframe with the data we want to plot. The second argument is actually another function! A little mind-bending, but stick with it. In this function, called `aes`, we place all the things we want to plot. Here, we just want to plot the relationship between `sex` and `preference_for_novel_object`, so that's what we enter into the `aes` function. 
 
 The `ggplot` function is followed by additional functions that add things layer-by-layer to the plot. Just running the `ggplot` function alone doesn't do much:
+
+
 
 ```{r}
 
