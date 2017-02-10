@@ -5,6 +5,9 @@ date: "2/8/2017"
 output: html_document
 ---
 
+These exercises are worth 25 points total.
+
+
 ### Question 1
 
 Load the `tidyverse` package.
@@ -84,6 +87,11 @@ Perform a correlation test to test whether there is statistically significant re
 ### Question 7
 
 Create a boxplot of foraging in males compared with females.
+
+```{r}
+
+
+```
 
 
 ### Question 8
