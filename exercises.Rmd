@@ -47,6 +47,15 @@ Do a web search for how to find (a) the number of rows and (b) the number of col
 
 ### Question 4
 
+Convert the columns `cg_tank_condition` and `sex` to a factor.
+
+```{r}
+
+
+```
+
+### Question 5
+
 Use `ggplot` to plot the tank condition on the x-axis and the total number of male-male chases on the y axis.
 
 _Hint_: Remember the basics of using ggplot: To set up a ggplot, you need a `data` argument and a `mapping` argument. The `mapping` argument always looks like `mapping = aes(x = some_column_name, y = some_other_column_name)`. Then type `+` followed by whatever `geoms` you want to use, for example, `geom_point()`. 
@@ -56,12 +65,11 @@ Follow the code from the lecture if you get confused, substituting the arguments
 ```{r}
 
 
-
 ```
 
 
 
-### Question 5
+### Question 6
 
 Plot the relationship between male-male chases (x-axis) and total male courting (y-axis) as a scatterplot.
 
@@ -74,7 +82,7 @@ Again, follow the example scatterplot from the lecture if you're confused.
 ```
 
 
-### Question 6
+### Question 7
 
 Perform a correlation test to test whether there is statistically significant relationship between total male-male chases and total male courtships.
 
@@ -84,21 +92,12 @@ Perform a correlation test to test whether there is statistically significant re
 ```
 
 
-### Question 7
+### Question 8
 
 Create a boxplot of foraging in males compared with females.
 
 ```{r}
 
-
-```
-
-
-### Question 8
-
-Is there a statistically significant difference in foraging between males and females?
-
-```{r}
 
 
 ```
@@ -106,9 +105,10 @@ Is there a statistically significant difference in foraging between males and fe
 
 ### Question 9
 
-Plot female-female chases by treatment.
+Is there a statistically significant difference in foraging between males and females?
 
 ```{r}
+
 
 
 ```
@@ -116,9 +116,46 @@ Plot female-female chases by treatment.
 
 ### Question 10
 
-Be creative! Plot any relationship between two variables that you haven't yet explored.
+Plot female-female chases by treatment.
 
 ```{r}
+
+
+
+```
+
+
+### Question 11
+
+Plot the total number of male chases by treatment for separately for each person in the class.
+
+_How?!_ ggplot actually makes this really easy. When you use ggplot you can made a grid of graphs, which is super useful when dissecting your dataset from different angles.
+
+To make a grid of graphs, add 
+
+```
++ facet_wrap(~ name_of_column_in_dataframe)
+```
+
+to the end of you call to ggplot. For example, if we wanted to see what the relationship between chases and courtship was for each common garden treatment separately, we would take the code from Question 6 above and modify it slightly so that it looks like:
+
+
+```{r}
+
+ggplot(data = common_garden, mapping = aes(x = total_male_male_chases, y = total_male_courting)) +
+  geom_point() +
+  facet_wrap(~ cg_tank_condition)
+
+```
+
+Now it becomes a lot easier to see how the relationship between courtship and chasing changes depending on the treatment.
+
+Adapt the code above, using `facet_wrap()` to plot the relationship between common garden tank condition and total number of male chases for each student in the class.
+
+-------------
+
+```{r}
+
 
 
 ```
