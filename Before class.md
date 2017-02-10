@@ -13,3 +13,7 @@ To download RStudio go [here](https://www.rstudio.com/products/rstudio/download/
 ### download data files
 
 Click [here](https://github.com/lukereding/intro_to_r/archive/master.zip) to download all the materials I’ll use in class today. Once you unzip the file, you’ll find a folder called ‘data’. These contain the data files we’ll use in class today.
+
+### install the `tidyverse` package
+
+Open RStudio. Go to the Console. Type in `install.packages("tidyverse")` to install the `tidyverse` package.
