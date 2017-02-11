@@ -9,6 +9,7 @@ These exercises are worth 25 points total.
 
 
 ### Question 1
+1 point.
 
 Load the `tidyverse` package.
 
@@ -20,6 +21,7 @@ Load the `tidyverse` package.
 
 
 ### Question 2
+2 points.
 
 Use the `read_csv` function to read in the common garden video spreadsheet. Save it to an object called `common_garden`. Check to to make sure all the data types are correct.
 
@@ -34,6 +36,7 @@ _Hint:_ If you don't know where the spreadsheet is, use `file.choose()` to find 
 
 
 ### Question 3
+2 points.
 
 Do a web search for how to find (a) the number of rows and (b) the number of columns in your `common_garden` dataframe. Enter in the R code that returns the number of rows and columns below.
 
@@ -46,6 +49,7 @@ Do a web search for how to find (a) the number of rows and (b) the number of col
 
 
 ### Question 4
+2 points.
 
 Convert the columns `cg_tank_condition` and `sex` to a factor.
 
@@ -55,6 +59,7 @@ Convert the columns `cg_tank_condition` and `sex` to a factor.
 ```
 
 ### Question 5
+3 points.
 
 Use `ggplot` to plot the tank condition on the x-axis and the total number of male-male chases on the y axis.
 
@@ -70,6 +75,7 @@ Follow the code from the lecture if you get confused, substituting the arguments
 
 
 ### Question 6
+3 points.
 
 Plot the relationship between male-male chases (x-axis) and total male courting (y-axis) as a scatterplot.
 
@@ -83,6 +89,7 @@ Again, follow the example scatterplot from the lecture if you're confused.
 
 
 ### Question 7
+2 points.
 
 Perform a correlation test to test whether there is statistically significant relationship between total male-male chases and total male courtships.
 
@@ -93,6 +100,7 @@ Perform a correlation test to test whether there is statistically significant re
 
 
 ### Question 8
+2 points.
 
 Create a boxplot of foraging in males compared with females.
 
@@ -104,6 +112,7 @@ Create a boxplot of foraging in males compared with females.
 
 
 ### Question 9
+2 points.
 
 Is there a statistically significant difference in foraging between males and females?
 
@@ -115,6 +124,7 @@ Is there a statistically significant difference in foraging between males and fe
 
 
 ### Question 10
+2 points.
 
 Plot female-female chases by treatment.
 
@@ -126,6 +136,7 @@ Plot female-female chases by treatment.
 
 
 ### Question 11
+4 points.
 
 Plot the total number of male chases by treatment for separately for each person in the class.
 
