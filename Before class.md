@@ -17,3 +17,7 @@ Click [here](https://github.com/lukereding/intro_to_r/archive/master.zip) to dow
 ### install the `tidyverse` package
 
 Open RStudio. Go to the Console. Type in `install.packages("tidyverse")` to install the `tidyverse` package.
+
+### take [this](https://goo.gl/forms/3eHnyppQawir6QJm1) two-question survey
+
+thanks!
