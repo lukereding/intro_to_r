@@ -76,7 +76,7 @@ We can name the object anything we want. I'm going to assign the output of the `
 
 ```{r}
 
-df <- read_csv("/Users/lukereding/Desktop/r_presentation/data/for_presentation.csv")
+df <- read_csv(file = "/Users/lukereding/Documents/r_presentation/data/for_presentation.csv")
 
 ```
 
@@ -172,7 +172,7 @@ So now I re-do the ggplot adding a `+` sign followed by the geom I want to use:
 
 ```{r}
 
-ggplot(data = df, mapping = aes(x = sex, y = preference_for_novel_object)) + # set up the ggplot
+ggplot(data = df, mapping = aes(x = sex, y = preference_for_novel_object)) +
   geom_boxplot() 
 
 ```
@@ -182,9 +182,10 @@ Now we have the boxplot we wanted.
 The nice thing about `ggplot` is that the plot is built in layers, so it's easy to add, for example, the data points that make up each box by adding the geom for points:
 
 ```{r}
-ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) + # set up the ggplot
+ggplot(data = df, mapping = aes(sex, preference_for_novel_object)) +
   geom_boxplot() + # add the boxplots
   geom_point() # add the points
+
 ```
 
 From the plot, we see a couple things:
@@ -225,8 +226,10 @@ Before, we were interested in visualizing the relationship between a _continuous
 We can plot this relationship using the same approach we used above in `ggplot`. Since boxplots don't make sense to use to show the relationship between two categorical variables, we can just plot the data points instead. The geom for this, which we encountered above, is `geom_point`. Finally, we have to modify the code above to tell ggplot we want to plot the relationship between `time_in_central_corridor` and `preference_for_novel_object`:
 
 ```{r}
+
 ggplot(data = df, mapping = aes(x = time_in_central_corridor, y = preference_for_novel_object)) + # set up the ggplot
   geom_point() # add points
+
 ```
 
 It's often helpful when plotting a scatterplot to add a trend line. This line provides an easy way for someone to see how preference for the novel object changes as time in the central corridor increases.
@@ -255,7 +258,7 @@ Unlike a lot of the functions above, `cor.test` doesn't accept a `data = ` argum
 
 ```{r}
 
-cor.test(df$time_in_central_corridor, df$preference_for_novel_object)
+cor.test(x = df$time_in_central_corridor, y = df$preference_for_novel_object)
 
 ```
 

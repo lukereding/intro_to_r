@@ -5,8 +5,11 @@ date: "2/8/2017"
 output: html_document
 ---
 
-These exercises are worth 25 points total.
+These exercises use the data on the common garden fish you followed and entered into the Google Sheet. The spreadsheet has been modified a little to make things a little easier to work with.
 
+Answer each question by typing the code into the grey areas of the document below. To run the code in the grey boxes, place your cursor in the box and press Command + Enter or Control + Enter, or simply copy and paste the code into your Console.
+
+These exercises are worth 25 points total. 
 
 ### Question 1
 1 point.
@@ -23,9 +26,9 @@ Load the `tidyverse` package.
 ### Question 2
 2 points.
 
-Use the `read_csv` function to read in the common garden video spreadsheet. Save it to an object called `common_garden`. Check to to make sure all the data types are correct.
+Use the `read_csv` function to read in the common garden video spreadsheet. It's in the folder you downloaded from Github, inside the `data` folder. It's called `fri.csv`. Save it to an object called `common_garden`.
 
-_Hint:_ If you don't know where the spreadsheet is, use `file.choose()` to find it.
+_Hint:_ If you don't know where the spreadsheet is, use `file.choose()` to find it. See the presentation for an example if you're confused.
 
 ```{r}
 
@@ -36,9 +39,11 @@ _Hint:_ If you don't know where the spreadsheet is, use `file.choose()` to find 
 
 
 ### Question 3
-2 points.
+3 points.
 
-Do a web search for how to find (a) the number of rows and (b) the number of columns in your `common_garden` dataframe. Enter in the R code that returns the number of rows and columns below.
+Type in `common_garden` to bring up the top of your dataframe and a preveiw of your data. It includes the number of variables (columns) and the number of rows (observations) in the data frame. Note that sometimes additional columns are listed at the bottom of the preview if all the columns cannot fit on the page.
+
+Do a web search for how to find (a) the number of rows and (b) the number of columns in your `common_garden` dataframe. Google 'find number of columns in a data frame r'. Enter in the R code that returns the number of rows and columns below.
 
 
 ```{r}
@@ -46,50 +51,52 @@ Do a web search for how to find (a) the number of rows and (b) the number of col
 
 
 ```
+
 
 
 ### Question 4
-2 points.
 
-Convert the columns `cg_tank_condition` and `sex` to a factor.
-
-```{r}
-
-
-```
-
-### Question 5
 3 points.
 
-Use `ggplot` to plot the tank condition on the x-axis and the total number of male-male chases on the y axis.
+Use `ggplot` to create a boxplot with the tank condition on the x-axis and the total number of male-male chases on the y axis.
 
-_Hint_: Remember the basics of using ggplot: To set up a ggplot, you need a `data` argument and a `mapping` argument. The `mapping` argument always looks like `mapping = aes(x = some_column_name, y = some_other_column_name)`. Then type `+` followed by whatever `geoms` you want to use, for example, `geom_point()`. 
+_Hint_: Remember the basics of using ggplot: The setup of using ggplot always looks like same:
 
-Follow the code from the lecture if you get confused, substituting the arguments.
+```
+
+ggplot(data = name_of_your_dataframe, mapping = aes(x = name_of_x_column, y = name_of_y_column))
+
+```
+
+If you get a blank plot, remember to add your geoms! For example, we used `+ geom_boxplot()` in class to add a boxplot to our blank plot.
+
+Follow the code from the lecture if you get confused, substituting the specific arguments.
+
 
 ```{r}
 
 
 ```
 
+
+
+### Question 5
+
+3 points.
+
+Plot the relationship between total male-male chases (x-axis) and total male courtships (y-axis) as a scatterplot.
+
+Again, follow the example scatterplot from the lecture if you get confused.
+
+```{r}
+
+
+
+```
 
 
 ### Question 6
 3 points.
-
-Plot the relationship between male-male chases (x-axis) and total male courting (y-axis) as a scatterplot.
-
-Again, follow the example scatterplot from the lecture if you're confused.
-
-```{r}
-
-
-
-```
-
-
-### Question 7
-2 points.
 
 Perform a correlation test to test whether there is statistically significant relationship between total male-male chases and total male courtships.
 
@@ -99,10 +106,10 @@ Perform a correlation test to test whether there is statistically significant re
 ```
 
 
-### Question 8
+### Question 7
 2 points.
 
-Create a boxplot of foraging in males compared with females.
+Create a boxplot of foraging in males compared with females. In your original spreadhseet, you entered in a separate column for male foraging and female foraging. In this final spreadsheet, we've combined foraging into a single column. We've created a second column, sex, so that we can plot the relationship between foraging amount and sex more easily.
 
 ```{r}
 
@@ -111,7 +118,7 @@ Create a boxplot of foraging in males compared with females.
 ```
 
 
-### Question 9
+### Question 8
 2 points.
 
 Is there a statistically significant difference in foraging between males and females?
@@ -123,10 +130,10 @@ Is there a statistically significant difference in foraging between males and fe
 ```
 
 
-### Question 10
+### Question 9
 2 points.
 
-Plot female-female chases by treatment.
+Produce a boxplot of female-female chases by treatment.
 
 ```{r}
 
@@ -138,7 +145,7 @@ Plot female-female chases by treatment.
 ### Question 11
 4 points.
 
-Plot the total number of male chases by treatment for separately for each person in the class.
+Plot the total number of male chases by treatment separately for each person in the class.
 
 _How?!_ ggplot actually makes this really easy. When you use ggplot you can made a grid of graphs, which is super useful when dissecting your dataset from different angles.
 
@@ -161,7 +168,7 @@ ggplot(data = common_garden, mapping = aes(x = total_male_male_chases, y = total
 
 Now it becomes a lot easier to see how the relationship between courtship and chasing changes depending on the treatment.
 
-Adapt the code above, using `facet_wrap()` to plot the relationship between common garden tank condition and total number of male chases for each student in the class.
+Adapt the code above, using `facet_wrap()` to produce a boxplot of the relationship between common garden tank condition and total number of male chases for each student in the class.
 
 -------------
 
